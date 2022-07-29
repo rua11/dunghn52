@@ -1,5 +1,6 @@
 from fastapi import FastAPI
-from core.commons import base_model
+from core.commons import base_model 
+#aa
 
 
 from core.commons.ibase_service import engine
