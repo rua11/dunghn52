@@ -7,6 +7,8 @@ class Lesson(Base):
     __tablename__ = 'lessons'
     starttime = Column(String(30),nullable=False)
     endtime =Column(String(50),nullable=False)
-    numberofsessions = Column(Integer)
+    number_of_sessions = Column(Integer)
+    
+    lesson_clroom_subject_cls = relationship('lesson_clroom_subject_cl', lazy='joined', back_populates='lessons')
     
     

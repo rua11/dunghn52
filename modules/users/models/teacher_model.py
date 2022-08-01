@@ -11,8 +11,9 @@ class Teacher(Base):
     name = Column(String(30),nullable=False)
     level = Column(String(10),nullable=False)
     specialize = Column(String(50),nullable=False)
-    workunit_id = Column(UUID(as_uuid=True),ForeignKey(WorkUnit.id), nullable= False)
+    work_unit_id = Column(UUID(as_uuid=True),ForeignKey(WorkUnit.id), nullable= False)
     
-    workunit = relationship(WorkUnit, lazy="joined", back_populates="teachers")
-    subject_classes = relationship('subjectclasses', lazy='joined', back_populates='teachers')
+    work_unit = relationship(WorkUnit, lazy="joined", back_populates="teachers")
+    subject_classes = relationship('subject_classes', lazy='joined', back_populates='teachers')
+    roll_calls = relationship('roll_calls', lazy='joined', back_populates='teachers')
     

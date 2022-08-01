@@ -11,3 +11,9 @@ class SubjectClass(Base):
     teacher_id = Column(UUID(as_uuid=True),ForeignKey(Teacher.id), nullable= False)
     
     teachers = relationship('teachers', lazy='joined', back_populates='subject_classes')
+    subject_subject_classes = relationship('subjec_subject_classes', lazy='joined', back_populates='subject_classes')
+    lesson_clroom_subject_cls = relationship('lesson_clroom_subject_cl', lazy='joined', back_populates='subject_classes')
+    
+    student_subject_classes = relationship('student_subject_classes', lazy="joined", back_populates="subject_classes")
+    roll_calls = relationship('roll_calls', lazy="joined", back_populates="subject_classes")
+    
