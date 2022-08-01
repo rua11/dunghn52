@@ -7,9 +7,8 @@ from sqlalchemy.orm import relationship
 class ClassRoom(Base):
     __tablename__ = 'class_rooms'
     name = Column(String(30),nullable=False)
-    address =Column(String(50),nullable=False)
+    address =Column(String(50))
     slot = Column(Integer,nullable=False) 
-    slot2 = Column(Integer,nullable=False) 
     
     lesson_clroom_subject_cls = relationship('lesson_clroom_subject_cl', lazy='joined', back_populates='class_rooms')
     

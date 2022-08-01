@@ -9,8 +9,8 @@ from sqlalchemy.orm import relationship
 class Teacher(Base):
     __tablename__ = 'teachers'
     name = Column(String(30),nullable=False)
-    level = Column(String(10),nullable=False)
-    specialize = Column(String(50),nullable=False)
+    level = Column(String(10))
+    specialize = Column(String(50))
     work_unit_id = Column(UUID(as_uuid=True),ForeignKey(WorkUnit.id), nullable= False)
     
     work_unit = relationship(WorkUnit, lazy="joined", back_populates="teachers")

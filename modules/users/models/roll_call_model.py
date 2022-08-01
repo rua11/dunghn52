@@ -11,8 +11,8 @@ class RollCall(Base):
     __tablename__ = 'roll_calls'
     teacher_id = Column(UUID(as_uuid=True),ForeignKey(Teacher.id), nullable= False)
     subject_classes_id =  Column(UUID(as_uuid=True),ForeignKey(SubjectClass.id), nullable= False)
-    semester = Column(String(30),nullable=False)
-    year = Column(String(30),nullable=False)
+    semester = Column(String(30))
+    year = Column(String(30))
     
     teachers = relationship(Teacher, lazy= 'joined',back_populates= 'roll_calls')
     subject_classes = relationship(SubjectClass, lazy= 'joined',back_populates= 'roll_calls')

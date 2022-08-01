@@ -10,8 +10,8 @@ from modules.users.models.subject_class_model import SubjectClass
 class SubjectSubjectClass(Base):
     __tablename__ = 'subjec_subject_classes'
     subject_id = Column(UUID(as_uuid=True),ForeignKey(Subject.id), nullable= False)
-    semester = Column(String(30),nullable=False)
-    year = Column(String(30),nullable=False)
+    semester = Column(String(30))
+    year = Column(String(30))
     subject_class_id = Column(UUID(as_uuid=True),ForeignKey(SubjectClass.id), nullable= False)
     number_of_students = Column(Integer)
     
