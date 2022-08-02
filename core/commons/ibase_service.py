@@ -45,12 +45,3 @@ class PgService:
     def __call__(self):
             pass
                        
-
-# def get_db():
-#     db = SessionLocal()
-#     try:
-#         yield db
-#     finally:
-#         db.close()
-
-
