@@ -6,3 +6,4 @@ prefix_url = '/work_unit'
 
 
 routes = APIRouter() 
+routes.include_router(work_unit_api.router)
