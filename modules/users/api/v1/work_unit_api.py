@@ -8,11 +8,11 @@ router = APIRouter(
     responses={404: {"description": "Not found"}},
 )
 
-@router.post('/add-work-unit')
+@router.post('/add-work-unit' )
 async def add_work_unit(request: WorkUnitAddRequest):
     try:
         res = WorkUnitService().add_work_unit(request= request)
-        return res
+        return WorkUnitResponse(**res.__dict__)
     except Exception as ex:
         return ex
 

@@ -13,7 +13,7 @@ class WorkUnitTeacher(BaseModel):
             orm_mode = True
     
 class WorkUnitResponse(WorkUnitAddRequest):
-    work_unit: WorkUnitTeacher = None
+    # work_unit: WorkUnitTeacher = None
     pass
     class config:
         orm_mode = True
