@@ -12,7 +12,7 @@ class DetailRollCall(Base):
     absent = Column(Integer)
     reason = Column(String(200))
     
-    students = relationship('students', lazy="joined", back_populates="detail_roll_calls")
+    students = relationship('Student', lazy="joined", back_populates="detail_roll_calls")
     roll_calls = relationship(RollCall, lazy="joined", back_populates="detail_roll_calls")
     
     

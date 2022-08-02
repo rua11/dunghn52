@@ -17,6 +17,6 @@ class RollCall(Base):
     teachers = relationship(Teacher, lazy= 'joined',back_populates= 'roll_calls')
     subject_classes = relationship(SubjectClass, lazy= 'joined',back_populates= 'roll_calls')
     
-    detail_roll_calls = relationship('detail_roll_calls', lazy="joined", back_populates="roll_calls")
+    detail_roll_calls = relationship('DetailRollCall', lazy="joined", back_populates="roll_calls")
     
     

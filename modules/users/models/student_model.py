@@ -15,6 +15,6 @@ class Student(Base):
     sex = Column(ENUM(SexType))
     course = Column(String(30))
     
-    student_subject_classes = relationship('student_subject_classes', lazy="joined", back_populates="students")
+    student_subject_classes = relationship('StudentSubjectClass', lazy="joined", back_populates="students")
     detail_roll_calls = relationship(DetailRollCall, lazy="joined", back_populates="students")
     

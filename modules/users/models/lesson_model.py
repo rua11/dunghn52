@@ -9,6 +9,6 @@ class Lesson(Base):
     endtime =Column(String(50),nullable=False)
     number_of_sessions = Column(Integer)
     
-    lesson_clroom_subject_cls = relationship('lesson_clroom_subject_cl', lazy='joined', back_populates='lessons')
+    lesson_clroom_subject_cls = relationship('LessonClroomSubjectCl', lazy='joined', back_populates='lessons')
     
     

@@ -13,7 +13,6 @@ class Teacher(Base):
     specialize = Column(String(50))
     work_unit_id = Column(UUID(as_uuid=True),ForeignKey(WorkUnit.id), nullable= False)
     
-    work_unit = relationship(WorkUnit, lazy="joined", back_populates="teachers")
-    subject_classes = relationship('subject_classes', lazy='joined', back_populates='teachers')
-    roll_calls = relationship('roll_calls', lazy='joined', back_populates='teachers')
+    subject_classes = relationship('SubjectClass', lazy='joined', back_populates='teachers')
+    roll_calls = relationship('RollCall', lazy='joined', back_populates='teachers')
     

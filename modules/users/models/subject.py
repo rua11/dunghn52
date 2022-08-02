@@ -11,4 +11,4 @@ class Subject(Base):
     theory = Column(Integer)
     practice = Column(Integer)
     
-    subject_subject_classes = relationship('subjec_subject_classes', lazy='joined', back_populates='subjects')
+    subject_subject_classes = relationship('SubjectSubjectClass', lazy='joined', back_populates='subjects')

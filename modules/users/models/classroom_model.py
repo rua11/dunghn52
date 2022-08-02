@@ -10,5 +10,5 @@ class ClassRoom(Base):
     address =Column(String(50))
     slot = Column(Integer,nullable=False) 
     
-    lesson_clroom_subject_cls = relationship('lesson_clroom_subject_cl', lazy='joined', back_populates='class_rooms')
+    lesson_clroom_subject_cls = relationship('LessonClroomSubjectCl', lazy='joined', back_populates='class_rooms')
     
