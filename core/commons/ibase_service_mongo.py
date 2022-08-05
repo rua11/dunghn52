@@ -1,40 +1,40 @@
 from abc import abstractmethod
+from bson import json_util
+import json
+
 from typing import TypeVar
 from bson import ObjectId
 import motor.motor_asyncio
 myclient = "mongodb://localhost:27017/"
-
 client = motor.motor_asyncio.AsyncIOMotorClient(myclient)
-
 db = client.school
-col = db.student
+col = db.eeeeee
 
-class IbaseMongo:
-    def __init__(self, col):
+class IBaseMongo:
+    def __init__(self):
         self.db = db
         self.col = col
-        self.mycol = self.db['self.coll']
         
     @abstractmethod
-    async def add(self, value):
+    def add(self, value):
         try:
-            object = await self.mycol.insert_one[value.dict()]
+            object = self.col.insert_one(value)
             return object
         except Exception as ex:
             raise ex
         
     @abstractmethod
-    async def get_one(self, value):
+    def get_one(self, value):
         try:
-            object = await self.mycol.find_one({"_id": ObjectId(value.inserted_id)})
+            object = self.col.find_one({"_id": value})
             return object
         except Exception as ex:
             raise ex
     
     @abstractmethod
-    async def get_list(self, value):
+    def get_list(self, value):
         try:
-            object = await self.mycol.find().list(value)
+            object = self.col.find().to_list(value)
             return object
         except Exception as ex:
             raise ex

@@ -1,10 +1,8 @@
-import datetime
-from email import message
 from typing import TypeVar, Generic
 from pydantic.generics import GenericModel
+from datetime import datetime
 from fastapi import status
-T = TypeVar('T')
-from typing import Generic, TypeVar
+T= TypeVar('T')
 
 
 class BaseResponse(GenericModel, Generic[T]):
@@ -15,7 +13,7 @@ class BaseResponse(GenericModel, Generic[T]):
     data : T = None
     
 class SuccessResponse(BaseResponse):
-    code : int = status.HTTP_200_Ok
+    code : int = status.HTTP_200_OK
     status : bool = True
     
 class ErrorsReponse(BaseResponse):
