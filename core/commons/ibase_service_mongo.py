@@ -38,5 +38,13 @@ class IBaseMongo:
             return object
         except Exception as ex:
             raise ex
-        
     
+    @abstractmethod
+    def search(self,value):
+        try:
+            object = self.col.find({"name":  { "$regex": "^{}".format(value) }}).to_list(100000)
+            return object
+        except Exception as ex:
+            raise ex
+    
+

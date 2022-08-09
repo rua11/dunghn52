@@ -49,4 +49,8 @@ async def get_list_student(number: int):
         return SuccessResponse(data=StudentListResponse(student_list=res))
     except Exception as ex:
         return ExceptionResponse(errors=str(ex.args))
+    
+@router.post('/get-student-by-name')
+async def get_student_by_name(name: str):
+    pass
         
