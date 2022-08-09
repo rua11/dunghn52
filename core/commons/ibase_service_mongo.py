@@ -42,9 +42,25 @@ class IBaseMongo:
     @abstractmethod
     def search(self,value):
         try:
-            object = self.col.find({"name":  { "$regex": "^{}".format(value) }}).to_list(100000)
+            object = self.col.find({"name":  { "$regex": "[{}]".format(value) }}).to_list(100000)
             return object
         except Exception as ex:
             raise ex
+        
+    @abstractmethod
+    def update_one(self, value, id):
+        try:
+            object = self.col.update_one({"_id": id}, {"$set": value.dict()})
+            return object               
+        except Exception as ex:
+            raise ex
+        
+    @abstractmethod
+    def delete_one(self, value):
+        try:
+            object = self.col.delete_one({'_id': value})
+            return object
+        except Exception as ex:
+            raise ex
+        
     
-
