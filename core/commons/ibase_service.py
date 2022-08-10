@@ -21,7 +21,14 @@ class IBaseService:
             self.db.close()
             
     
-        
+    @abstractmethod
+    def query_all(self, T):
+        try:
+            object = self.db.query(T)
+            return object
+        except Exception as ex:
+            raise ex
+     
     @abstractmethod
     def add(self, T, value):
         try:
@@ -33,6 +40,31 @@ class IBaseService:
         except Exception as ex:
             self.db.rollback()
             raise(ex)
+    
+    @abstractmethod
+    def filter_object_by_id(self,T,key,value):
+        try: 
+            object = self.db.query(T).filter(key == value)
+            return object.first()
+        except Exception as ex:
+            raise ex
+        
+    @abstractmethod
+    def update(self, T, value):
+        try:
+            
+            object= self.db.query(T).filter(T.id==value.id)
+            if object.first():
+                value = dict(filter(lambda item: item[1] is not None, value.dict().items()))
+                object.update(value)
+                self.db.commit()
+                return object.first()
+            return None
+        except Exception as ex:
+            self.db.rollback()
+            raise(ex)
+    
+        
         
     
 class PgService:

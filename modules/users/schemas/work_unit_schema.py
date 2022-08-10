@@ -4,6 +4,10 @@ from uuid import UUID
 
 class WorkUnitAddRequest(BaseModel):
     name : str  = None
+
+class WorkUnitUpdateRequest(WorkUnitAddRequest):
+    id: UUID
+    
 class WorkUnitTeacher(BaseModel):
     name : str =None
     level : str =None
@@ -13,7 +17,7 @@ class WorkUnitTeacher(BaseModel):
             orm_mode = True
     
 class WorkUnitResponse(WorkUnitAddRequest):
-    # work_unit: WorkUnitTeacher = None
+    # work_unit: WorkUnitTeacher = []
     pass
     class config:
         orm_mode = True
