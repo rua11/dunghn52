@@ -18,6 +18,9 @@ class PageRequest(BaseModel):
     pagenum: int = Field(default=1)
     pagesize: int = Field(default=1, gt= 0)
     
+class UpdateRequest(BaseModel):
+    id:UUID
+    
 class BaseSchemaRequest(BaseModel):
     id: UUID = None
     

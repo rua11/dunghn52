@@ -1,5 +1,6 @@
 from uuid import UUID
-from fastapi import APIRouter
+from fastapi import APIRouter, Depends
+from core.commons.base_schema import BaseSchemaSearchRequest
 from core.commons.context import SuccessResponse
 from modules.users.schemas.work_unit_schema import WorkUnitAddRequest, WorkUnitResponse, WorkUnitUpdateRequest
 from modules.users.service.work_unit_service import WorkUnitService
@@ -8,6 +9,15 @@ router = APIRouter(
     tags=["Quản Lý Đơn Vị Công Tác"],
     responses={404: {"description": "Not found"}},
 )
+
+@router.get('/search')
+def search(request: BaseSchemaSearchRequest = Depends()):
+    try:
+        res = WorkUnitService().search(request= request)
+        if res:
+            return SuccessResponse(data = res)
+    except Exception as ex:
+        return ex
 
 @router.post('/add-work-unit' )
 def add_work_unit(request: WorkUnitAddRequest):
