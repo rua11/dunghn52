@@ -1,7 +1,8 @@
 from abc import abstractmethod
+from urllib import request
 from core.commons.ibase_service import IBaseService
 from modules.users.models.work_unit_model import WorkUnit
-from modules.users.schemas.work_unit_schema import WorkUnitAddRequest, WorkUnitResponse, WorkUnitUpdateRequest
+from modules.users.schemas.work_unit_schema import WorkUnitAddListRequest, WorkUnitAddRequest, WorkUnitResponse, WorkUnitUpdateListRequest, WorkUnitUpdateRequest
 
 
 class IWorkUnitService(IBaseService):
@@ -26,4 +27,25 @@ class IWorkUnitService(IBaseService):
         return super().filter_object_by_id(T = WorkUnit, key = WorkUnit.id, value = value)
     
 class WorkUnitService(IWorkUnitService):
-    pass
+    def add_list(self, request: WorkUnitAddListRequest):
+        try:
+            for item in request.work_unit_items:
+                self.add(T = WorkUnit, value = item)
+            return True
+        except Exception as ex:
+            raise ex
+        
+    def update_list(self, request: WorkUnitUpdateListRequest ):
+        try:
+            if request.work_unit_items != None:
+                for item in request.work_unit_items:
+                    if item.id:
+                        # item = WorkUnitUpdateRequest(**item.dict())
+                        IWorkUnitService().update_work_unit(request= item)
+                    else:
+                        # item = WorkUnitAddRequest(**item.dict())
+                        IWorkUnitService().add_work_unit(request=item)
+                return True
+        except Exception as ex:
+            self.db.rollback()
+            raise ex

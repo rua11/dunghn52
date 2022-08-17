@@ -24,9 +24,17 @@ class IBaseMongo:
             raise ex
         
     @abstractmethod
+    def get_one_field(self, value):
+        try:
+            object = self.col.find_one(value)
+            return object
+        except Exception as ex:
+            raise ex
+
+    @abstractmethod
     def get_one(self, value):
         try:
-            object = self.col.find_one({"_id": value})
+            object = self.col.find_one({"_id": ObjectId(value)})
             return object
         except Exception as ex:
             raise ex
@@ -50,7 +58,7 @@ class IBaseMongo:
     @abstractmethod
     def update_one(self, value, id):
         try:
-            object = self.col.update_one({"_id": id}, {"$set": value.dict()})
+            object = self.col.update_one({"_id":ObjectId(id)}, {"$set": value})
             return object               
         except Exception as ex:
             raise ex
