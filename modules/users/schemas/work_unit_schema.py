@@ -21,9 +21,10 @@ class WorkUnitTeacher(BaseModel):
     work_unit_id : UUID = None
     class Config:
             orm_mode = True
-    
+
 class WorkUnitResponse(WorkUnitAddRequest):
-    # work_unit: list[WorkUnitTeacher] = []
-    pass
+    id: UUID = None
+    teachers: list[WorkUnitTeacher] = []
+    
     class config:
         orm_mode = True

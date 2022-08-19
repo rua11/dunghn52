@@ -52,15 +52,15 @@ def test_add_weather(request: WeatherRequest):
 #             i = 0
         
         
- 
-@router.on_event("startup")
-def init_data():
-    trigger = CronTrigger(hour = 15, minute = 57, second=40)
-    scheduler = AsyncIOScheduler()
-    scheduler.add_job(WeatherServiceBase.job, trigger=trigger)
-    # scheduler.add_job(WeatherServiceBase.job, "interval", seconds = 5)
+# apschedule api
+# @router.on_event("startup")
+# def init_data():
+#     trigger = CronTrigger(hour = 15, minute = 57, second=40)
+#     scheduler = AsyncIOScheduler()
+#     scheduler.add_job(WeatherServiceBase.job, trigger=trigger)
+#     # scheduler.add_job(WeatherServiceBase.job, "interval", seconds = 5)
     
-    scheduler.start()
+#     scheduler.start()
     
 @router.get('/get-object-weather')
 async def get_object_weather(id: str):

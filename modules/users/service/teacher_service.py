@@ -4,12 +4,13 @@ from modules.users.schemas.teacher_schema import TeacherAddRequest, TeacherRespo
 from modules.users.models.teacher_model import Teacher
 class ITeacherService(IBaseService):
     
+
     @abstractmethod
-    def search(self, T, request, numeric_fields: list[str], schema_response, additional_func=None):
+    def search(self, request):
         T = Teacher
         numeric_fields = []
         schema_response = TeacherResponse
-        return super().search(schema_response = schema_response)
+        return super().search(T=T, request = request, numeric_fields = numeric_fields, schema_response= schema_response)
     @abstractmethod
     def add_teacher(self, request: TeacherAddRequest):
         return super().add(T = Teacher, value = request)
@@ -21,6 +22,10 @@ class ITeacherService(IBaseService):
     @abstractmethod
     def filter_teacher_by_id(self, id):
         return super().filter_object_by_id(T= Teacher, key = Teacher.id, value = id)
+    
+    @abstractmethod
+    def delete_teacher(self, key, value):
+        return super().delete(T= Teacher, key = Teacher.id, value = value)
     
     
 class TeacherService(ITeacherService):

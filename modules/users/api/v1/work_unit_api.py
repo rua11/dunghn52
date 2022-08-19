@@ -6,6 +6,7 @@ from modules.users.schemas.work_unit_schema import WorkUnitAddListRequest, WorkU
 from modules.users.service.work_unit_service import WorkUnitService
 
 router = APIRouter(
+    prefix = '/work-unit', 
     tags=["Quản Lý Đơn Vị Công Tác"],
     responses={404: {"description": "Not found"}},
 )

@@ -20,19 +20,28 @@ class TeacherUpdateRequest(BaseModel):
 class TeacherWorkUnitResponse(BaseModel):
     id : UUID = None
     name : str  = None
+    class Config:
+            orm_mode = True
 
 class TeacherSubjectClassResponse(BaseModel):
     name : str 
     teacher_id : UUID = None
+    class Config:
+            orm_mode = True
     
 class TeacherRollCallResponse(BaseModel):
     teacher_id : UUID
     subject_classes_id : UUID 
     semester :str = None
     year :str = None
+    class Config:
+            orm_mode = True
     
     
-class TeacherResponse(TeacherUpdateRequest):
+class TeacherResponse(TeacherAddRequest):
+    id: UUID = None
     work_unit : TeacherWorkUnitResponse = []
     subject_classes : list[TeacherSubjectClassResponse]= []
-    roll_calls : list [TeacherRollCallResponse] = []
+    roll_calls : list[TeacherRollCallResponse] = []
+    class config:
+        orm_mode = True
