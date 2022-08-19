@@ -7,3 +7,7 @@ from modules import router_builder
 app = FastAPI()
 
 router_builder(app)
+
+@app.get('/hello')
+async def method_name():
+    return {"message": "Hello World"}
