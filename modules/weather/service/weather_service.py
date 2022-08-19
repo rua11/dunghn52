@@ -8,6 +8,7 @@ import json
 import time
 from bson import Binary
 
+
 class IWeatherService(IBaseService):
     lang = 'vi'
     key = '55a68c065171b9421a937ff88c3e3e6f'
@@ -31,7 +32,7 @@ class WeatherServiceBase():
             response1 = requests.get(url = url) 
             ress = json.loads(response1.text)
             print(ress)
-            
+            print(item.id)
             itemmg = {}
             itemmg['user_id'] = Binary.from_uuid(item.id)
             itemmg['lat'] = item.lat
@@ -54,6 +55,6 @@ class WeatherServiceBase():
             i += 1
             if i == 2:
                 print('dang nghi')
-                time.sleep(15)
+                time.sleep(20)
                 i = 0
             

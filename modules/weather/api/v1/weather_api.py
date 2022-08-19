@@ -14,7 +14,8 @@ from apscheduler.schedulers.asyncio import AsyncIOScheduler
 import json
 import requests
 from fastapi.responses import JSONResponse
-from bson import json_util
+from bson import json_util, ObjectId
+from uuid import UUID
 
 
 
@@ -54,7 +55,7 @@ def test_add_weather(request: WeatherRequest):
  
 @router.on_event("startup")
 def init_data():
-    trigger = CronTrigger(hour = 16, minute = 35, second=0)
+    trigger = CronTrigger(hour = 15, minute = 57, second=40)
     scheduler = AsyncIOScheduler()
     scheduler.add_job(WeatherServiceBase.job, trigger=trigger)
     # scheduler.add_job(WeatherServiceBase.job, "interval", seconds = 5)
@@ -65,8 +66,26 @@ def init_data():
 async def get_object_weather(id: str):
     try:
         res = await IBaseMongo().get_one(value=id)
-        # a = json.loads(json_util.dumps(res))
-        # return JSONResponse(status_code=status.HTTP_201_CREATED, content=a)
+        # a = json_util.dumps(res)
+        # b = json.loads(a)
+        
+        # return JSONResponse(status_code=status.HTTP_201_CREATED, content=b)
+        # print(res['_id'])
+        res['id'] = str(res['_id'])
+        return SuccessResponse(data= WeatherResponse(**res))
+    except Exception as ex:
+        raise ex
+    
+@router.get('/get-object-weather-by-user-id')
+async def get_object_weather_by_user_id( id: UUID):
+    try:
+        res = await IBaseMongo().get_one_user(value=id)
+        # a = json_util.dumps(res)
+        # b = json.loads(a)
+        
+        # return JSONResponse(status_code=status.HTTP_201_CREATED, content=b)
+        # print(res['_id'])
+        res['id'] = str(res['_id'])
         return SuccessResponse(data= WeatherResponse(**res))
     except Exception as ex:
         raise ex

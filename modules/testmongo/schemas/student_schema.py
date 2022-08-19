@@ -15,6 +15,7 @@ class PyObjectId(ObjectId):
     def __modify_schema__(cls, field_schema):
         field_schema.update(type="string") 
         
+        
 class StudentRequest(BaseModel):
     id: PyObjectId = Field(default_factory=PyObjectId, alias="_id")
     name: str = Field(...)
@@ -37,6 +38,7 @@ class StudentRequest(BaseModel):
             
             
 class StudentUpdateRequset(BaseModel):
+    
     name: str =None
     email: str =None
     course: str =None
@@ -54,6 +56,8 @@ class StudentUpdateRequset(BaseModel):
                 }
             }
 class StudentResponse(BaseModel):
+    id: PyObjectId = Field(default_factory=PyObjectId, alias="_id")
+    
     name: str =None
     email: str =None
     course: str =None

@@ -1,6 +1,7 @@
 from abc import abstractmethod
-from bson import json_util
-import json
+from uuid import UUID
+from bson import json_util, Binary
+
 
 from typing import TypeVar
 from bson import ObjectId
@@ -39,6 +40,14 @@ class IBaseMongo:
         except Exception as ex:
             raise ex
     
+    @abstractmethod
+    def get_one_user(self,value):
+        try:
+            object = self.col.find_one({"user_id": Binary.from_uuid(value)})
+            return object
+        except Exception as ex:
+            raise ex
+        
     @abstractmethod
     def get_list(self, value):
         try:
