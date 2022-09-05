@@ -1,0 +1,26 @@
+syntax = "proto3";
+service TeacherController {
+    rpc TeacherById (TeacherByIdRequest) returns (TeacherResponse);    
+}
+
+message TeacherByIdRequest{
+    string id=1;
+
+}
+
+message Teacher{
+    string name =1;
+    string level =2;
+    string specialize = 3;
+    string work_unit_id = 4;
+}
+
+message TeacherResponse{
+    string version = 1;
+    string response_time= 2;
+    string message = 3;
+    optional string errors = 4;
+    optional Teacher data= 5;
+    int32 code = 6;
+    optional bool status= 7;
+}

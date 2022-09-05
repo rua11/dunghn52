@@ -45,3 +45,11 @@ class TeacherResponse(TeacherAddRequest):
     roll_calls : list[TeacherRollCallResponse] = []
     class config:
         orm_mode = True
+
+class TeacherGrpcResponse(BaseModel):
+    name :str
+    level :str = None
+    specialize: str = None
+    work_unit_id : UUID
+    class Config:
+        orm_mode = True
