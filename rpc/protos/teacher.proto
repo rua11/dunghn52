@@ -1,4 +1,5 @@
 syntax = "proto3";
+import "google/protobuf/any.proto";
 service TeacherController {
     rpc TeacherById (TeacherByIdRequest) returns (TeacherResponse);    
 }
@@ -8,11 +9,29 @@ message TeacherByIdRequest{
 
 }
 
+message WorkUnit{
+    string name =1;
+    
+}
+
+// message Unit{
+
+//     string name =1;
+// }
+
 message Teacher{
+    string id = 6;
     string name =1;
     string level =2;
     string specialize = 3;
     string work_unit_id = 4;
+    message Unit{
+        string id = 6;
+
+        string name =2;
+    }
+    
+    Unit work_unit= 5;
 }
 
 message TeacherResponse{

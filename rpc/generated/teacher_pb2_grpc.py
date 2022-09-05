@@ -2,7 +2,7 @@
 """Client and server classes corresponding to protobuf-defined services."""
 import grpc
 
-from rpc.generated import teacher_pb2 as teacher__pb2
+import teacher_pb2 as teacher__pb2
 
 
 class TeacherControllerStub(object):
