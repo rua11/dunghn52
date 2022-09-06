@@ -1,6 +1,6 @@
 import json
 from uuid import UUID
-from pydantic import BaseModel, validator
+from pydantic import BaseModel, validator, Field
 
 class TeacherBase(BaseModel):
     name :str
@@ -46,28 +46,43 @@ class TeacherResponse(TeacherAddRequest):
     roll_calls : list[TeacherRollCallResponse] = []
     class config:
         orm_mode = True
+class PyObjectId(UUID):
+    @classmethod
+    def __get_validators__(cls):
+        yield cls.validate
 
-
-class TeacherWorkUnitResponse1(BaseModel):
-    id: UUID = None
-    name: str  = None
-    @validator('id')
-    def validate(cls, v):
-        v.id= str(v.id)
-        return v
-            
-class TeacherGrpcResponse(BaseModel):
-    id: UUID
-    name :str
-    level :str = None
-    specialize: str = None
-    work_unit_id : UUID
-    work_unit:TeacherWorkUnitResponse1
-    @validator('work_unit_id','id')
+    @classmethod
     def validate(cls, v):
         if not isinstance(v, UUID):
             raise TypeError('ObjectId required2')
         return str(v)
+
+    @classmethod
+    def __modify_schema__(cls, field_schema):
+        field_schema.update(type="string")
+
+class TeacherWorkUnitResponse1(BaseModel):
+    id: PyObjectId
+    name: str  = None
+    # @validator('id')
+    # def validate(cls, v):
+    #     v.id= str(v.id)
+    #     return v.id
+    class Config:
+        orm_mode = True
+            
+class TeacherGrpcResponse(BaseModel):
+    id: PyObjectId 
+    name :str
+    level :str = None
+    specialize: str = None
+    work_unit_id : PyObjectId 
+    work_unit:TeacherWorkUnitResponse1
+    # @validator('work_unit_id','id')
+    # def validate(cls, v):
+    #     if not isinstance(v, UUID):
+    #         raise TypeError('ObjectId required2')
+    #     return str(v)
     class Config:
         orm_mode = True
         
